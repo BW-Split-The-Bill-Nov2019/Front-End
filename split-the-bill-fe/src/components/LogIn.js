@@ -2,6 +2,7 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
+import Dropdown from './Dropdown';
 
 const Title = styled.h1`
   color: #177c84;
@@ -9,10 +10,19 @@ const Title = styled.h1`
 `;
 const Div1 = styled.div`
   //   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
-  //   width: 30%;
-  //   padding: 3%;
-  //
+    width: 30%;
+    padding: 3%;
+    margin: 0 auto;
+  
 `;
+
+const Subtitle = styled.h3`
+  color: #177c84;
+  font-size: 24px;
+  margin: 0 auto;
+  margin-top: 25px;
+`;
+
 const Div2 = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,7 +64,8 @@ const Button = styled.button`
 const LogIn = ({ values }) => {
   return (
     <Div1>
-      <Title>Split-The-Bill</Title>
+      <Dropdown />
+      <Subtitle>Log In to your Account</Subtitle>
       <Form>
         <Div2>
           <Label3>Email </Label3>
