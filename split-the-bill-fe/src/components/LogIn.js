@@ -1,6 +1,6 @@
 import React from "react";
 import { withFormik, Form, Field } from "formik";
-import {axiosWithAuth} from '../utils/axiosWithAuth';
+import axios from "axios";
 import styled from "styled-components";
 
 const Title = styled.h1`
@@ -80,10 +80,10 @@ const FormikLogIn = withFormik({
     };
   },
   handleSubmit(values, { setStatus }) {
-    axiosWithAuth()
+    axios
       .post("https://reqres.in/api/users/", values)
       .then(res => {
-        localStorage.setStatus('token', res.data.payload);
+        setStatus(res.data);
         console.log(res);
       })
       .catch(err => console.log(err.response));
