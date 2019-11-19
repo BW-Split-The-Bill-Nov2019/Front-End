@@ -46,7 +46,6 @@ const Fieldbutton = styled(Field)`
 
 const Label3 = styled.label`
   margin-right: 170px;
-  margin-top: 1.5%;
 `;
 const Label4 = styled.label`
   margin-top: 1.5%;

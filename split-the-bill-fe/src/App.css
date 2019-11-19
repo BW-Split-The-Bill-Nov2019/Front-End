@@ -21,6 +21,10 @@
   color: #09d3ac;
 }
 
+* {
+  outline: none;
+}
+
 .dropdown {
   position: relative;
   margin: 0 auto;
@@ -74,3 +78,4 @@ li:hover {
   right:6px;
   top:18px;
 }
+

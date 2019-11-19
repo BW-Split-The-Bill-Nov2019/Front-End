@@ -54,4 +54,5 @@ const FormikTableUserCard = withFormik({
       .catch(err => console.log(err.response));
   }
 })(TableUserCard);
+
 export default FormikTableUserCard;

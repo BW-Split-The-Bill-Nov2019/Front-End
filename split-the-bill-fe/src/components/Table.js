@@ -6,16 +6,19 @@ import TableUserCard from "./TableUserCard";
 import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom'
 
+
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
 `;
+
 const Div1 = styled.div`
  // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
     min-width: 35%;
     padding: 3%;
     margin: 0 auto;
 `;
+
 const Div2 = styled.div`
   display: flex;
   flex-direction: column;
@@ -48,6 +51,7 @@ const FieldInfo = styled(Field)`
   height: 10px;
   padding: 15px;
   margin-top: 5px;
+
 `;
 const DateAndTotal = styled(Field)`
   border-radius: 20px;
@@ -56,6 +60,7 @@ const DateAndTotal = styled(Field)`
   height: 10px;
   padding: 15px;
   margin: 5px;
+
 `;
 const Addbutton = styled(Field)`
   background: none;
@@ -126,9 +131,16 @@ const LogIn = ({ values }) => {
             as="button"
             onClick={toggleHide}
           >
-            <p style={{ color: "#177c84", fontSize: "45px", marginLeft: "160px", marginTop: "0px"}}>
-              &#x2B;
-            </p>
+            <i
+              class="material-icons"
+              style={{
+                color: "#177c84",
+                fontSize: "45px",
+                marginLeft: "180px"
+              }}
+            >
+              add
+            </i>
           </Addbutton>
         </div>
         <div>
@@ -166,4 +178,6 @@ const FormikLogIn = withFormik({
       .catch(err => console.log(err.response));
   }
 })(LogIn);
+
 export default FormikLogIn;
+

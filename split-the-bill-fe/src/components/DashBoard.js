@@ -2,17 +2,24 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
+import YouOwe from "./YouOwe";
+import OwedToYou from "./OwedToYou";
+import YouPaid from "./YouPaid";
+import PaidToYou from "./PaidToYou";
 import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom'
+
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
 `;
 const Div1 = styled.div`
+
     // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
     min-width: 35%;
     padding: 3%;
     margin: 0 auto;
+
 `;
 const Div2 = styled.div`
   display: flex;
@@ -25,10 +32,12 @@ const InnerDiv = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
   width: 220px;
 `;
 const OutterDiv = styled.div`
   display: flex;
+
   justify-content: center;
   align-items: center;
   margin-top: -25px;
@@ -56,6 +65,13 @@ const Label3 = styled.label`
   margin-bottom: 8px;
 `;
 
+const H4 = styled.h4`
+  margin-top: 50px;
+`;
+const H3 = styled.h3`
+  margin-top: 50px;
+`;
+
 const DashBoard = ({ values }) => {
   return (
     <Div1>
@@ -72,18 +88,24 @@ const DashBoard = ({ values }) => {
           <FieldInfo type="text" name="email" />
         </Div2>
       </Form>
-      <h3>Pending</h3>
+
+      <H3>Pending</H3>
       <OutterDiv>
         <InnerDiv>
           <h4>You Owe</h4>
-          <h4>Owed to You</h4>
+          <YouOwe />
+          <H4>Owed to You</H4>
+          <OwedToYou />
         </InnerDiv>
       </OutterDiv>
-      <h3>Paid</h3>
+      <H3>Paid</H3>
       <OutterDiv>
         <InnerDiv>
           <h4>You Paid</h4>
-          <h4>Paid to You</h4>
+          <YouPaid />
+          <H4>Paid to You</H4>
+          <PaidToYou />
+
         </InnerDiv>
       </OutterDiv>
     </Div1>
@@ -106,4 +128,5 @@ const FormikDashBoard = withFormik({
       .catch(err => console.log(err.response));
   }
 })(DashBoard);
+
 export default FormikDashBoard;
