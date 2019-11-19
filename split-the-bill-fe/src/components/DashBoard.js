@@ -2,6 +2,10 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
+import YouOwe from "./YouOwe";
+import OwedToYou from "./OwedToYou";
+import YouPaid from "./YouPaid";
+import PaidToYou from "./PaidToYou";
 
 const Title = styled.h1`
   color: #177c84;
@@ -56,7 +60,12 @@ const Label3 = styled.label`
   margin-right: 170px;
   margin-bottom: 8px;
 `;
-
+const H4 = styled.h4`
+  margin-top: 50px;
+`;
+const H3 = styled.h3`
+  margin-top: 50px;
+`;
 const DashBoard = ({ values }) => {
   return (
     <Div1>
@@ -70,18 +79,22 @@ const DashBoard = ({ values }) => {
           <FieldInfo type="text" name="email" />
         </Div2>
       </Form>
-      <h3>Pending</h3>
+      <H3>Pending</H3>
       <OutterDiv>
         <InnerDiv>
           <h4>You Owe</h4>
-          <h4>Owed to You</h4>
+          <YouOwe />
+          <H4>Owed to You</H4>
+          <OwedToYou />
         </InnerDiv>
       </OutterDiv>
-      <h3>Paid</h3>
+      <H3>Paid</H3>
       <OutterDiv>
         <InnerDiv>
           <h4>You Paid</h4>
-          <h4>Paid to You</h4>
+          <YouPaid />
+          <H4>Paid to You</H4>
+          <PaidToYou />
         </InnerDiv>
       </OutterDiv>
     </Div1>
