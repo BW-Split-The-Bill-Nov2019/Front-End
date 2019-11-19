@@ -3,6 +3,7 @@ import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
 import Dropdown from './Dropdown';
+import { Link } from 'react-router-dom';
 
 const Title = styled.h1`
   color: #177c84;
@@ -91,11 +92,15 @@ const CreateAccount = ({ values }) => {
           <Label5>Confirm Password</Label5>
           <FieldInfo type="password" name="confirmPassword" />
         </Div2>
-        <Fieldbutton className="field" as="button" type="submit" name="submit">
+        <Link to ='/login'>
+          <Fieldbutton className="field" as="button" type="submit" name="submit">
           Create Account
-        </Fieldbutton>
+          </Fieldbutton>
+        </Link>
       </Form>
-      <Button> Already have an account? Sign In</Button>
+      <Link to ='/login'>
+        <Button> Already have an account? Sign In</Button>
+      </Link>
     </Div1>
   );
 };

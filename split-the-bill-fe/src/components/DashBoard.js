@@ -3,7 +3,7 @@ import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
 import Dropdown from './Dropdown';
-
+import { Link } from 'react-router-dom';
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
@@ -62,9 +62,11 @@ const DashBoard = ({ values }) => {
       <Dropdown />
       <Title>Split-The-Bill</Title>
       <Form>
-        <Fieldbutton className="field" as="button" type="submit" name="submit">
-          Create a Table
-        </Fieldbutton>
+        <Link to='/table'>
+            <Fieldbutton className="field" as="button" type="submit" name="submit">
+            Create a Table
+            </Fieldbutton>
+        </Link>
         <Div2>
           <Label3>Search</Label3>
           <FieldInfo type="text" name="email" />

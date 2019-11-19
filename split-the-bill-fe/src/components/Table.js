@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import TableUserCard from "./TableUserCard";
 import Dropdown from './Dropdown';
+import { Link } from 'react-router-dom'
 
 const Title = styled.h1`
   color: #177c84;
@@ -59,6 +60,8 @@ const DateAndTotal = styled(Field)`
 const Addbutton = styled(Field)`
   background: none;
   border: none;
+  margin: 5px;
+  padding: none;
   &:active {
     outline: none;
     border: none;
@@ -123,16 +126,9 @@ const LogIn = ({ values }) => {
             as="button"
             onClick={toggleHide}
           >
-            <i
-              class="material-icons"
-              style={{
-                color: "#177c84",
-                fontSize: "45px",
-                marginLeft: "180px"
-              }}
-            >
-              add
-            </i>
+            <p style={{ color: "#177c84", fontSize: "45px", marginLeft: "160px", marginTop: "0px"}}>
+              &#x2B;
+            </p>
           </Addbutton>
         </div>
         <div>
@@ -143,10 +139,11 @@ const LogIn = ({ values }) => {
             placeholder=" Leave a comment..."
           ></textarea>
         </div>
-        ​
+        ​<Link to ='/dashboard'>
         <Fieldbutton as="button" type="submit" name="submit">
           Submit Table
         </Fieldbutton>
+        </Link>
       </Form>
     </Div1>
   );
