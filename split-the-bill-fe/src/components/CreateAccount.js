@@ -68,6 +68,11 @@ const Button = styled.button`
   color: red;
   font-weight: bold;
   margin-top:15px;
+  background: none;
+`;
+
+const Span = styled.span`
+  text-decoration: underline;
 `;
 
 const CreateAccount = ({ values }) => {
@@ -99,7 +104,7 @@ const CreateAccount = ({ values }) => {
         </Link>
       </Form>
       <Link to ='/login'>
-        <Button> Already have an account? Sign In</Button>
+        <Button> Already have an account? <Span>Sign In</Span></Button>
       </Link>
     </Div1>
   );

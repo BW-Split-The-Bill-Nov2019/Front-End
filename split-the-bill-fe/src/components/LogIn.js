@@ -60,6 +60,12 @@ const Button = styled.button`
   border: none;
   color: red;
   font-weight: bold;
+  margin-top:15px;
+  background: none;
+`;
+
+const Span = styled.span`
+  text-decoration: underline;
 `;
 
 const LogIn = ({ values }) => {
@@ -74,7 +80,7 @@ const LogIn = ({ values }) => {
 
           <Label4>Password</Label4>
           <FieldInfo type="password" name="password" />
-          <Button> Forgot Password?</Button>
+          <Button> <Span>Forgot Password?</Span></Button>
         </Div2>
         <Link to ='/dashboard'>
           <Fieldbutton className="field" as="button" type="submit" name="submit">
@@ -82,7 +88,6 @@ const LogIn = ({ values }) => {
         </Fieldbutton>
         </Link>
       </Form>
-      <Button> Already have an account? Sign In</Button>
     </Div1>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 class Dropdown extends React.Component {
 constructor(){
@@ -33,11 +34,12 @@ showDropdownMenu(event) {
          <div className="button" onClick={this.showDropdownMenu}> Split-The-Bill </div>
 
           { this.state.displayMenu ? (
-          <ul>
-        <li><a href="#Login">Login</a></li>
-         <li><a href="#CreateTable">Create Table</a></li>
-         <li><a href="#LogOut">Log Out</a></li>
-          </ul>
+        <ul>
+          <li><Link to='/login'>Login</Link></li>
+          <li><Link to='/dashboard'>Dashboard</Link></li>
+          <li><Link to='/table'>Create Table</Link></li>
+          <li><Link to='/'>Log Out</Link></li>
+        </ul>
         ):
         (
           null
