@@ -2,17 +2,25 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
+import Dropdown from './Dropdown';
+import { Link } from 'react-router-dom';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
-const Title = styled.h1`
-  color: #177c84;
-  font-size: 44px;
-`;
 const Div1 = styled.div`
-  //   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
-  //   width: 30%;
-  //   padding: 3%;
-  //
+  //box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+    min-width: 35%;
+    padding: 3%;
+    margin: 0 auto;
+  
 `;
+
+const Subtitle = styled.h3`
+  color: #177c84;
+  font-size: 24px;
+  margin: 0 auto;
+  margin-top: 25px;
+`;
+
 const Div2 = styled.div`
   display: flex;
   flex-direction: column;
@@ -49,29 +57,73 @@ const Button = styled.button`
   border: none;
   color: red;
   font-weight: bold;
+  margin-top:15px;
+  background: none;
 `;
 
-const LogIn = ({ values }) => {
-  return (
-    <Div1>
-      <Title>Split-The-Bill</Title>
-      <Form>
+const Span = styled.span`
+  text-decoration: underline;
+`;
+
+class Login extends React.Component {
+  state = {
+    credentials: {
+      email: '',
+      password: ''
+    }
+  };
+
+  handleChange = e => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  login = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/api/login', this.state.credentials)
+      .then(res => {
+        localStorage.setItem('token', res.data.payload);
+      })
+      .catch(err => console.log(err.response));
+  };
+
+  render() {
+    return (
+        <Div1>
+        <Dropdown />
+        <Subtitle>Log In to your Account</Subtitle>
+        <Form onSubmit={this.login}>
         <Div2>
-          <Label3>Email </Label3>
-          <FieldInfo type="text" name="email" />
+          <Label3>Email</Label3>
+          <FieldInfo 
+          type="text" 
+          name="email" 
+          value={this.state.credentials.email}
+          onChange={this.handleChange} />
 
           <Label4>Password</Label4>
-          <FieldInfo type="password" name="password" />
-          <Button> Forgot Password?</Button>
+          <FieldInfo 
+          type="password" 
+          name="password" 
+          value={this.state.credentials.password}
+          onChange={this.handleChange} />
+          <Button><Span>Forgot Password?</Span></Button>
         </Div2>
-        <Fieldbutton className="field" as="button" type="submit" name="submit">
+        <Link to ='/dashboard'>
+          <Fieldbutton className="field" as="button" type="submit" name="submit">
           Create Account
         </Fieldbutton>
+        </Link>
       </Form>
-      <Button> Already have an account? Sign In</Button>
-    </Div1>
-  );
-};
+      </Div1>   
+    );
+  }
+}
 const FormikLogIn = withFormik({
   mapPropsToValues({ email, password }) {
     return {
@@ -88,5 +140,5 @@ const FormikLogIn = withFormik({
       })
       .catch(err => console.log(err.response));
   }
-})(LogIn);
+})(Login);
 export default FormikLogIn;
