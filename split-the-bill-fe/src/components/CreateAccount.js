@@ -17,7 +17,7 @@ const Subtitle = styled.h3`
 `;
 const Div1 = styled.div`
     // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
-    width: 30%;
+    min-width: 35%;
     padding: 3%;
     margin: 0 auto;
 `;
@@ -66,6 +66,7 @@ const Button = styled.button`
   border: none;
   color: red;
   font-weight: bold;
+  margin-top:15px;
 `;
 
 const CreateAccount = ({ values }) => {
