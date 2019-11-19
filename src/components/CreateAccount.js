@@ -2,8 +2,8 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
-import Dropdown from './Dropdown';
-import { Link } from 'react-router-dom';
+import Dropdown from "./Dropdown";
+import { Link } from "react-router-dom";
 
 const Subtitle = styled.h3`
   color: #177c84;
@@ -12,10 +12,10 @@ const Subtitle = styled.h3`
   margin-top: 25px;
 `;
 const Div1 = styled.div`
-    // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
-    min-width: 35%;
-    padding: 3%;
-    margin: 0 auto;
+  // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+  min-width: 35%;
+  padding: 3%;
+  margin: 0 auto;
 `;
 const Div2 = styled.div`
   display: flex;
@@ -41,6 +41,7 @@ const Fieldbutton = styled(Field)`
 `;
 const Label1 = styled.label`
   margin-right: 135px;
+  margin-top: 30px;
 `;
 const Label2 = styled.label`
   margin-right: 135px;
@@ -62,7 +63,7 @@ const Button = styled.button`
   border: none;
   color: red;
   font-weight: bold;
-  margin-top:15px;
+  margin-top: 15px;
   background: none;
 `;
 
@@ -92,14 +93,22 @@ const CreateAccount = ({ values }) => {
           <Label5>Confirm Password</Label5>
           <FieldInfo type="password" name="confirmPassword" />
         </Div2>
-        <Link to ='/login'>
-          <Fieldbutton className="field" as="button" type="submit" name="submit">
-          Create Account
+        <Link to="/login">
+          <Fieldbutton
+            className="field"
+            as="button"
+            type="submit"
+            name="submit"
+          >
+            Create Account
           </Fieldbutton>
         </Link>
       </Form>
-      <Link to ='/login'>
-        <Button> Already have an account? <Span>Sign In</Span></Button>
+      <Link to="/login">
+        <Button>
+          {" "}
+          Already have an account? <Span>Sign In</Span>
+        </Button>
       </Link>
     </Div1>
   );

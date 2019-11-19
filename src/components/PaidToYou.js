@@ -8,6 +8,7 @@ const PDiv = styled.div`
   border-top: 2px solid gray;
   padding: 0px 5px;
   width: 220px;
+  margin-bottom: 20px;
 `;
 const S = styled.span`
   font-weight: bold;
@@ -23,12 +24,12 @@ const PaidToYou = props => {
   return (
     <div>
       <PDiv>
-        <P>08/15/2019</P>
+        <P>{props.Date}</P>
         <P>
-          <S>Jake</S>
+          <S>{props.Name}</S>
         </P>
         <P>
-          <Smoney>+$10.00</Smoney>
+          <Smoney>+{props.Amount}</Smoney>
         </P>
       </PDiv>
     </div>

@@ -8,6 +8,7 @@ const PDiv = styled.div`
   border-top: 2px solid gray;
   padding: 0px 5px;
   width: 220px;
+  margin-bottom: 20px;
 `;
 const S = styled.span`
   font-weight: bold;

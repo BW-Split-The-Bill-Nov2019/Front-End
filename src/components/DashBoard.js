@@ -72,8 +72,11 @@ const H3 = styled.h3`
 `;
 
 const DashBoard = ({ values }) => {
+  console.log(dummyData);
   const [owedToYou, setOwedToYou] = useState(dummyData.owedToYou);
   const [youOwe, setYouOwe] = useState(dummyData.youOwe);
+  const [paidToYou, setPaidToYou] = useState(dummyData.paidToYou);
+  const [youPaid, setYouPaid] = useState(dummyData.youPaid);
   return (
     <Div1>
       <Dropdown />
@@ -99,8 +102,12 @@ const DashBoard = ({ values }) => {
       <OutterDiv>
         <InnerDiv>
           <h4>You Owe</h4>
-          <YouOwe />
+          {youOwe.map(Cv => (
+            <YouOwe Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
+          ))}
+
           <H4>Owed to You</H4>
+
           {owedToYou.map(Cv => (
             <OwedToYou Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
           ))}
@@ -110,9 +117,14 @@ const DashBoard = ({ values }) => {
       <OutterDiv>
         <InnerDiv>
           <h4>You Paid</h4>
-          <YouPaid />
+          {youPaid.map(Cv => (
+            <YouPaid Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
+          ))}
+
           <H4>Paid to You</H4>
-          <PaidToYou />
+          {paidToYou.map(Cv => (
+            <PaidToYou Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
+          ))}
         </InnerDiv>
       </OutterDiv>
     </Div1>
