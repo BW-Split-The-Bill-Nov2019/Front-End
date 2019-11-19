@@ -19,6 +19,22 @@ const Div2 = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const InnerDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 220px;
+`;
+const OutterDiv = styled.div`
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  margin-top: -25px;
+`;
+
 const FieldInfo = styled(Field)`
   border-radius: 20px;
   border: 1px solid gray;
@@ -28,50 +44,50 @@ const FieldInfo = styled(Field)`
 const Fieldbutton = styled(Field)`
   border-radius: 20px;
   border: 1px solid #bdc3c7;
-  width: 200px;
+  width: 230px;
   padding: 10px;
-  background: #177c84;
+  background: #7eb2b7;
   color: white;
   font-size: 15px;
-  margin-top: 2%;
+  margin-bottom: 20px;
 `;
 
 const Label3 = styled.label`
   margin-right: 170px;
-`;
-const Label4 = styled.label`
-  margin-top: 1.5%;
-  margin-right: 140px;
+  margin-bottom: 8px;
 `;
 
-const Button = styled.button`
-  border: none;
-  color: red;
-  font-weight: bold;
-`;
-
-const LogIn = ({ values }) => {
+const DashBoard = ({ values }) => {
   return (
     <Div1>
       <Title>Split-The-Bill</Title>
       <Form>
-        <Div2>
-          <Label3>Email </Label3>
-          <FieldInfo type="text" name="email" />
-
-          <Label4>Password</Label4>
-          <FieldInfo type="password" name="password" />
-          <Button> Forgot Password?</Button>
-        </Div2>
         <Fieldbutton className="field" as="button" type="submit" name="submit">
-          Create Account
+          Create a Table
         </Fieldbutton>
+        <Div2>
+          <Label3>Search</Label3>
+          <FieldInfo type="text" name="email" />
+        </Div2>
       </Form>
-      <Button> Already have an account? Sign In</Button>
+      <h3>Pending</h3>
+      <OutterDiv>
+        <InnerDiv>
+          <h4>You Owe</h4>
+          <h4>Owed to You</h4>
+        </InnerDiv>
+      </OutterDiv>
+      <h3>Paid</h3>
+      <OutterDiv>
+        <InnerDiv>
+          <h4>You Paid</h4>
+          <h4>Paid to You</h4>
+        </InnerDiv>
+      </OutterDiv>
     </Div1>
   );
 };
-const FormikLogIn = withFormik({
+const FormikDashBoard = withFormik({
   mapPropsToValues({ email, password }) {
     return {
       email: email || "",
@@ -87,5 +103,5 @@ const FormikLogIn = withFormik({
       })
       .catch(err => console.log(err.response));
   }
-})(LogIn);
-export default FormikLogIn;
+})(DashBoard);
+export default FormikDashBoard;
