@@ -2,16 +2,15 @@ import React from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
-import Dropdown from './Dropdown';
-import { Link } from 'react-router-dom';
-import axiosWithAuth from '../utils/axiosWithAuth';
+import Dropdown from "./Dropdown";
+import { Link } from "react-router-dom";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const Div1 = styled.div`
   //box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
-    min-width: 35%;
-    padding: 3%;
-    margin: 0 auto;
-  
+  min-width: 35%;
+  padding: 3%;
+  margin: 0 auto;
 `;
 
 const Subtitle = styled.h3`
@@ -40,12 +39,13 @@ const Fieldbutton = styled(Field)`
   padding: 10px;
   background: #177c84;
   color: white;
-  font-size: 15px;
+  font-size: 20px;
   margin-top: 2%;
 `;
 
 const Label3 = styled.label`
   margin-right: 170px;
+  margin-top: 30px;
 `;
 const Label4 = styled.label`
   margin-top: 1.5%;
@@ -56,7 +56,7 @@ const Button = styled.button`
   border: none;
   color: red;
   font-weight: bold;
-  margin-top:15px;
+  margin-top: 15px;
   background: none;
 `;
 
@@ -67,8 +67,8 @@ const Span = styled.span`
 class Login extends React.Component {
   state = {
     credentials: {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     }
   };
 
@@ -84,42 +84,51 @@ class Login extends React.Component {
   login = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post('/api/login', this.state.credentials)
+      .post("/api/login", this.state.credentials)
       .then(res => {
-        localStorage.setItem('token', res.data.payload);
+        localStorage.setItem("token", res.data.payload);
       })
       .catch(err => console.log(err.response));
   };
 
   render() {
     return (
-        <Div1>
+      <Div1>
         <Dropdown />
         <Subtitle>Log In to your Account</Subtitle>
         <Form onSubmit={this.login}>
-        <Div2>
-          <Label3>Email</Label3>
-          <FieldInfo 
-          type="text" 
-          name="email" 
-          value={this.state.credentials.email}
-          onChange={this.handleChange} />
+          <Div2>
+            <Label3>Email</Label3>
+            <FieldInfo
+              type="text"
+              name="email"
+              value={this.state.credentials.email}
+              onChange={this.handleChange}
+            />
 
-          <Label4>Password</Label4>
-          <FieldInfo 
-          type="password" 
-          name="password" 
-          value={this.state.credentials.password}
-          onChange={this.handleChange} />
-          <Button><Span>Forgot Password?</Span></Button>
-        </Div2>
-        <Link to ='/dashboard'>
-          <Fieldbutton className="field" as="button" type="submit" name="submit">
-          Create Account
-        </Fieldbutton>
-        </Link>
-      </Form>
-      </Div1>   
+            <Label4>Password</Label4>
+            <FieldInfo
+              type="password"
+              name="password"
+              value={this.state.credentials.password}
+              onChange={this.handleChange}
+            />
+            <Button>
+              <Span>Forgot Password?</Span>
+            </Button>
+          </Div2>
+          <Link to="/dashboard">
+            <Fieldbutton
+              className="field"
+              as="button"
+              type="submit"
+              name="submit"
+            >
+              Log In
+            </Fieldbutton>
+          </Link>
+        </Form>
+      </Div1>
     );
   }
 }

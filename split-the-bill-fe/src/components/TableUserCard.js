@@ -32,7 +32,7 @@ const TableUserCard = props => {
             class="far fa-user"
             style={{ color: "#177c84", fontSize: "45px", marginRight: "10px" }}
           ></i>
-          <User type="text" name="title" placeholder="Name/Email" />
+          <User type="text" name="title" placeholder="Name" />
         </Div2>
       </Form>
     </Div1>

@@ -3,9 +3,8 @@ import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
 import TableUserCard from "./TableUserCard";
-import Dropdown from './Dropdown';
-import { Link } from 'react-router-dom'
-
+import Dropdown from "./Dropdown";
+import { Link } from "react-router-dom";
 
 const Title = styled.h1`
   color: #177c84;
@@ -13,10 +12,10 @@ const Title = styled.h1`
 `;
 
 const Div1 = styled.div`
- // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
-    min-width: 35%;
-    padding: 3%;
-    margin: 0 auto;
+  // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+  min-width: 35%;
+  padding: 3%;
+  margin: 0 auto;
 `;
 
 const Div2 = styled.div`
@@ -51,7 +50,6 @@ const FieldInfo = styled(Field)`
   height: 10px;
   padding: 15px;
   margin-top: 5px;
-
 `;
 const DateAndTotal = styled(Field)`
   border-radius: 20px;
@@ -60,7 +58,6 @@ const DateAndTotal = styled(Field)`
   height: 10px;
   padding: 15px;
   margin: 5px;
-
 `;
 const Addbutton = styled(Field)`
   background: none;
@@ -101,7 +98,7 @@ const LogIn = ({ values }) => {
   };
   return (
     <Div1>
-        <Dropdown />
+      <Dropdown />
       <Title>Split-The-Bill</Title>
       <Form>
         <Div2>
@@ -151,10 +148,11 @@ const LogIn = ({ values }) => {
             placeholder=" Leave a comment..."
           ></textarea>
         </div>
-        ​<Link to ='/dashboard'>
-        <Fieldbutton as="button" type="submit" name="submit">
-          Submit Table
-        </Fieldbutton>
+        ​
+        <Link to="/dashboard">
+          <Fieldbutton as="button" type="submit" name="submit">
+            Submit Table
+          </Fieldbutton>
         </Link>
       </Form>
     </Div1>
@@ -180,4 +178,3 @@ const FormikLogIn = withFormik({
 })(LogIn);
 
 export default FormikLogIn;
-
