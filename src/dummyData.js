@@ -53,54 +53,54 @@ const dummyData = {
   ],
   youPaid: [
     {
-      Name: "Andrew",
-      Email: "Andrew@email.com",
-      Date: "05/8/2019",
-      Amount: "$28.22"
+      Name: "Joe",
+      Email: "Joe@email.com",
+      Date: "03/4/2019",
+      Amount: "$14.22"
     },
     {
-      Name: "Dan",
-      Email: "Dan@email.com",
-      Date: "06/18/2019",
-      Amount: "$15.22"
+      Name: "Kristy",
+      Email: "Kristy@email.com",
+      Date: "08/11/2019",
+      Amount: "$6.44"
     },
     {
-      Name: "Chris",
-      Email: "Chris@email.com",
-      Date: "09/10/2019",
-      Amount: "$4.56"
+      Name: "Saul",
+      Email: "Saul@email.com",
+      Date: "12/06/2019",
+      Amount: "$19.29"
     },
     {
-      Name: "Moses",
-      Email: "Moses@email.com",
-      Date: "07/11/2019",
-      Amount: "$24.35"
+      Name: "Jeff",
+      Email: "Jeff@email.com",
+      Date: "03/30/2019",
+      Amount: "$8.95"
     }
   ],
   paidToYou: [
     {
-      Name: "Andrew",
-      Email: "Andrew@email.com",
-      Date: "05/8/2019",
-      Amount: "$28.22"
+      Name: "Jessa",
+      Email: "Jessa@email.com",
+      Date: "12/06/2019",
+      Amount: "$30.92"
     },
     {
-      Name: "Dan",
-      Email: "Dan@email.com",
-      Date: "06/18/2019",
-      Amount: "$15.22"
+      Name: "Emily",
+      Email: "Emily@email.com",
+      Date: "01/30/2019",
+      Amount: "$16.44"
     },
     {
-      Name: "Chris",
-      Email: "Chris@email.com",
-      Date: "09/10/2019",
-      Amount: "$4.56"
+      Name: "Kai",
+      Email: "Kai@email.com",
+      Date: "10/10/2019",
+      Amount: "$18.65"
     },
     {
-      Name: "Moses",
-      Email: "Moses@email.com",
-      Date: "07/11/2019",
-      Amount: "$24.35"
+      Name: "Kim",
+      Email: "Kim@email.com",
+      Date: "12/01/2019",
+      Amount: "$25.12"
     }
   ]
 };
