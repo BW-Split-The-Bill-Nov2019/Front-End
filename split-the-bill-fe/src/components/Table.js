@@ -3,12 +3,22 @@ import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
 import TableUserCard from "./TableUserCard";
+import Dropdown from './Dropdown';
+import { Link } from 'react-router-dom'
+
 
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
 `;
-const Div1 = styled.div``;
+
+const Div1 = styled.div`
+ // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+    min-width: 35%;
+    padding: 3%;
+    margin: 0 auto;
+`;
+
 const Div2 = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,6 +39,7 @@ const Div3 = styled.div`
 `;
 const Div4 = styled.div`
   display: flex;
+  color: #177c84;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -37,18 +48,25 @@ const FieldInfo = styled(Field)`
   border-radius: 20px;
   border: 1px solid gray;
   width: 200px;
-  padding: 10px;
+  height: 10px;
+  padding: 15px;
+  margin-top: 5px;
+
 `;
 const DateAndTotal = styled(Field)`
   border-radius: 20px;
   border: 1px solid gray;
-  width: 80px;
-  padding: 10px;
+  width: 125px;
+  height: 10px;
+  padding: 15px;
+  margin: 5px;
+
 `;
 const Addbutton = styled(Field)`
   background: none;
   border: none;
-
+  margin: 5px;
+  padding: none;
   &:active {
     outline: none;
     border: none;
@@ -67,6 +85,7 @@ const Fieldbutton = styled(Field)`
 
 const Label3 = styled.label`
   margin-right: 150px;
+  color: #177c84;
 `;
 
 const LogIn = ({ values }) => {
@@ -82,6 +101,7 @@ const LogIn = ({ values }) => {
   };
   return (
     <Div1>
+        <Dropdown />
       <Title>Split-The-Bill</Title>
       <Form>
         <Div2>
@@ -131,10 +151,11 @@ const LogIn = ({ values }) => {
             placeholder=" Leave a comment..."
           ></textarea>
         </div>
-        ​
+        ​<Link to ='/dashboard'>
         <Fieldbutton as="button" type="submit" name="submit">
           Submit Table
         </Fieldbutton>
+        </Link>
       </Form>
     </Div1>
   );
@@ -157,4 +178,6 @@ const FormikLogIn = withFormik({
       .catch(err => console.log(err.response));
   }
 })(LogIn);
+
 export default FormikLogIn;
+

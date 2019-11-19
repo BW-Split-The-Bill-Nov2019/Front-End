@@ -6,16 +6,20 @@ import YouOwe from "./YouOwe";
 import OwedToYou from "./OwedToYou";
 import YouPaid from "./YouPaid";
 import PaidToYou from "./PaidToYou";
+import Dropdown from './Dropdown';
+import { Link } from 'react-router-dom'
 
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
 `;
 const Div1 = styled.div`
-  //   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
-  //   width: 30%;
-  //   padding: 3%;
-  //
+
+    // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+    min-width: 35%;
+    padding: 3%;
+    margin: 0 auto;
+
 `;
 const Div2 = styled.div`
   display: flex;
@@ -60,25 +64,31 @@ const Label3 = styled.label`
   margin-right: 170px;
   margin-bottom: 8px;
 `;
+
 const H4 = styled.h4`
   margin-top: 50px;
 `;
 const H3 = styled.h3`
   margin-top: 50px;
 `;
+
 const DashBoard = ({ values }) => {
   return (
     <Div1>
+      <Dropdown />
       <Title>Split-The-Bill</Title>
       <Form>
-        <Fieldbutton className="field" as="button" type="submit" name="submit">
-          Create a Table
-        </Fieldbutton>
+        <Link to='/table'>
+            <Fieldbutton className="field" as="button" type="submit" name="submit">
+            Create a Table
+            </Fieldbutton>
+        </Link>
         <Div2>
           <Label3>Search</Label3>
           <FieldInfo type="text" name="email" />
         </Div2>
       </Form>
+
       <H3>Pending</H3>
       <OutterDiv>
         <InnerDiv>
@@ -95,6 +105,7 @@ const DashBoard = ({ values }) => {
           <YouPaid />
           <H4>Paid to You</H4>
           <PaidToYou />
+
         </InnerDiv>
       </OutterDiv>
     </Div1>
@@ -117,4 +128,5 @@ const FormikDashBoard = withFormik({
       .catch(err => console.log(err.response));
   }
 })(DashBoard);
+
 export default FormikDashBoard;
