@@ -4,11 +4,8 @@ import axios from "axios";
 import styled from "styled-components";
 import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
-const Title = styled.h1`
-  color: #177c84;
-  font-size: 44px;
-`;
 const Div1 = styled.div`
   //box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
     min-width: 35%;
@@ -68,19 +65,54 @@ const Span = styled.span`
   text-decoration: underline;
 `;
 
-const LogIn = ({ values }) => {
-  return (
-    <Div1>
-      <Dropdown />
-      <Subtitle>Log In to your Account</Subtitle>
-      <Form>
+class Login extends React.Component {
+  state = {
+    credentials: {
+      email: '',
+      password: ''
+    }
+  };
+
+  handleChange = e => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  login = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/api/login', this.state.credentials)
+      .then(res => {
+        localStorage.setItem('token', res.data.payload);
+      })
+      .catch(err => console.log(err.response));
+  };
+
+  render() {
+    return (
+        <Div1>
+        <Dropdown />
+        <Subtitle>Log In to your Account</Subtitle>
+        <Form onSubmit={this.login}>
         <Div2>
-          <Label3>Email </Label3>
-          <FieldInfo type="text" name="email" />
+          <Label3>Email</Label3>
+          <FieldInfo 
+          type="text" 
+          name="email" 
+          value={this.state.credentials.email}
+          onChange={this.handleChange} />
 
           <Label4>Password</Label4>
-          <FieldInfo type="password" name="password" />
-          <Button> <Span>Forgot Password?</Span></Button>
+          <FieldInfo 
+          type="password" 
+          name="password" 
+          value={this.state.credentials.password}
+          onChange={this.handleChange} />
+          <Button><Span>Forgot Password?</Span></Button>
         </Div2>
         <Link to ='/dashboard'>
           <Fieldbutton className="field" as="button" type="submit" name="submit">
@@ -88,9 +120,10 @@ const LogIn = ({ values }) => {
         </Fieldbutton>
         </Link>
       </Form>
-    </Div1>
-  );
-};
+      </Div1>   
+    );
+  }
+}
 const FormikLogIn = withFormik({
   mapPropsToValues({ email, password }) {
     return {
@@ -107,5 +140,5 @@ const FormikLogIn = withFormik({
       })
       .catch(err => console.log(err.response));
   }
-})(LogIn);
+})(Login);
 export default FormikLogIn;

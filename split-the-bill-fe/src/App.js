@@ -5,6 +5,8 @@ import LogIn from "./components/LogIn";
 import Table from "./components/Table";
 import Dashboard from "./components/DashBoard";
 import { Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+
 
 function App() {
   return (

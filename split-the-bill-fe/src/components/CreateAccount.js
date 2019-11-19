@@ -5,11 +5,6 @@ import styled from "styled-components";
 import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom';
 
-const Title = styled.h1`
-  color: #177c84;
-  font-size: 44px;
-  margin: 0 auto;
-`;
 const Subtitle = styled.h3`
   color: #177c84;
   font-size: 24px;
