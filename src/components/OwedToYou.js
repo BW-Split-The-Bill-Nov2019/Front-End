@@ -23,12 +23,12 @@ const OwedToYou = props => {
   return (
     <div>
       <PDiv>
-        <P>07/7/2019</P>
+        <P>{props.Date}</P>
         <P>
-          <S>Jordan</S>
+          <S>{props.Name}</S>
         </P>
         <P>
-          <Smoney>$18.67</Smoney>
+          <Smoney>{props.Amount}</Smoney>
         </P>
       </PDiv>
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
@@ -6,20 +6,19 @@ import YouOwe from "./YouOwe";
 import OwedToYou from "./OwedToYou";
 import YouPaid from "./YouPaid";
 import PaidToYou from "./PaidToYou";
-import Dropdown from './Dropdown';
-import { Link } from 'react-router-dom'
+import Dropdown from "./Dropdown";
+import { Link } from "react-router-dom";
+import dummyData from "../dummyData";
 
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
 `;
 const Div1 = styled.div`
-
-    // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
-    min-width: 35%;
-    padding: 3%;
-    margin: 0 auto;
-
+  // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+  min-width: 35%;
+  padding: 3%;
+  margin: 0 auto;
 `;
 const Div2 = styled.div`
   display: flex;
@@ -73,15 +72,22 @@ const H3 = styled.h3`
 `;
 
 const DashBoard = ({ values }) => {
+  const [owedToYou, setOwedToYou] = useState(dummyData.owedToYou);
+  const [youOwe, setYouOwe] = useState(dummyData.youOwe);
   return (
     <Div1>
       <Dropdown />
       <Title>Split-The-Bill</Title>
       <Form>
-        <Link to='/table'>
-            <Fieldbutton className="field" as="button" type="submit" name="submit">
+        <Link to="/table">
+          <Fieldbutton
+            className="field"
+            as="button"
+            type="submit"
+            name="submit"
+          >
             Create a Table
-            </Fieldbutton>
+          </Fieldbutton>
         </Link>
         <Div2>
           <Label3>Search</Label3>
@@ -95,7 +101,9 @@ const DashBoard = ({ values }) => {
           <h4>You Owe</h4>
           <YouOwe />
           <H4>Owed to You</H4>
-          <OwedToYou />
+          {owedToYou.map(Cv => (
+            <OwedToYou Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
+          ))}
         </InnerDiv>
       </OutterDiv>
       <H3>Paid</H3>
@@ -105,7 +113,6 @@ const DashBoard = ({ values }) => {
           <YouPaid />
           <H4>Paid to You</H4>
           <PaidToYou />
-
         </InnerDiv>
       </OutterDiv>
     </Div1>
