@@ -3,18 +3,18 @@ import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
 import TableUserCard from "./TableUserCard";
-import Dropdown from './Dropdown';
-import { Link } from 'react-router-dom'
+import Dropdown from "./Dropdown";
+import { Link } from "react-router-dom";
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
 `;
 
 const Div1 = styled.div`
- // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
-    min-width: 35%;
-    padding: 3%;
-    margin: 0 auto;
+  // box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+  min-width: 35%;
+  padding: 3%;
+  margin: 0 auto;
 `;
 
 const Div2 = styled.div`
@@ -86,7 +86,7 @@ const Label3 = styled.label`
 
 const LogIn = ({ values }) => {
   const [hiddenUsers, setHiddenUsers] = useState(new Array(16).fill(true));
-  console.log(hiddenUsers);
+
   const toggleHide = () => {
     const nextIndex = hiddenUsers.findIndex(displayed => {
       return displayed === true;
@@ -97,7 +97,7 @@ const LogIn = ({ values }) => {
   };
   return (
     <Div1>
-        <Dropdown />
+      <Dropdown />
       <Title>Split-The-Bill</Title>
       <Form>
         <Div2>
@@ -147,11 +147,10 @@ const LogIn = ({ values }) => {
             placeholder=" Leave a comment..."
           ></textarea>
         </div>
-        ​<Link to ='/dashboard'>
+        ​
         <Fieldbutton as="button" type="submit" name="submit">
           Submit Table
         </Fieldbutton>
-        </Link>
       </Form>
     </Div1>
   );
@@ -165,11 +164,13 @@ const FormikLogIn = withFormik({
     };
   },
   handleSubmit(values, { setStatus }) {
+    console.log("values", values);
     axios
       .post("https://reqres.in/api/users/", values)
       .then(res => {
         setStatus(res.data);
         console.log(res);
+        //redirect user to dashboard with history.push
       })
       .catch(err => console.log(err.response));
   }
