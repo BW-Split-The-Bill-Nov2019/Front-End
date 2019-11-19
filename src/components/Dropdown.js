@@ -23,6 +23,7 @@ showDropdownMenu(event) {
 
   hideDropdownMenu() {
     this.setState({ displayMenu: false }, () => {
+
       document.removeEventListener('click', this.hideDropdownMenu);
     });
 
@@ -30,6 +31,7 @@ showDropdownMenu(event) {
 
   render() {
     return (
+
         <div  className="dropdown" style = {{background:"#177C84",width:"200px"}} >
          <div className="button" onClick={this.showDropdownMenu}> Split-The-Bill </div>
 
@@ -53,3 +55,4 @@ showDropdownMenu(event) {
 }
 
 export default Dropdown;
+

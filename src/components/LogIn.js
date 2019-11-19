@@ -11,7 +11,6 @@ const Div1 = styled.div`
     min-width: 35%;
     padding: 3%;
     margin: 0 auto;
-  
 `;
 
 const Subtitle = styled.h3`
@@ -40,12 +39,13 @@ const Fieldbutton = styled(Field)`
   padding: 10px;
   background: #177c84;
   color: white;
-  font-size: 15px;
   margin-top: 2%;
 `;
 
 const Label3 = styled.label`
   margin-right: 170px;
+  margin-top: 30px;
+
 `;
 const Label4 = styled.label`
   margin-top: 1.5%;
@@ -56,6 +56,7 @@ const Button = styled.button`
   border: none;
   color: red;
   font-weight: bold;
+
   margin-top:15px;
   background: none;
 `;

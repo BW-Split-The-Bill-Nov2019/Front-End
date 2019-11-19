@@ -8,8 +8,6 @@ import Dashboard from "./components/DashBoard";
 import { Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 
-
-
 function App() {
   return (
     <div className="App">
@@ -18,6 +16,7 @@ function App() {
       <Route path='/login' component={LogIn} />
       <Route path='/dashboard' component={Dashboard} />
       <Route path='/table' component={Table} />
+
     </div>
   );
 }

@@ -5,8 +5,6 @@ import styled from "styled-components";
 import TableUserCard from "./TableUserCard";
 import Dropdown from './Dropdown';
 import { Link } from 'react-router-dom'
-
-
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
@@ -51,7 +49,6 @@ const FieldInfo = styled(Field)`
   height: 10px;
   padding: 15px;
   margin-top: 5px;
-
 `;
 const DateAndTotal = styled(Field)`
   border-radius: 20px;
@@ -60,7 +57,6 @@ const DateAndTotal = styled(Field)`
   height: 10px;
   padding: 15px;
   margin: 5px;
-
 `;
 const Addbutton = styled(Field)`
   background: none;
@@ -180,4 +176,3 @@ const FormikLogIn = withFormik({
 })(LogIn);
 
 export default FormikLogIn;
-
