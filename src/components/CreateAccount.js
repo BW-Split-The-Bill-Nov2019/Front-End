@@ -125,7 +125,7 @@ const FormikCreateAccount = withFormik({
   },
   handleSubmit(values, { setStatus }) {
     axios
-      .post("https://reqres.in/api/users/", values)
+      .post("http://localhost:4444/api/auth/register", values)
       .then(res => {
         setStatus(res.data);
         console.log(res);
