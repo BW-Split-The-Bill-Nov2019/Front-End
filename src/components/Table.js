@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
-import TableUserCard from "./TableUserCard";
+// import TableUserCard from "./TableUserCard";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 const Title = styled.h1`
@@ -41,6 +41,12 @@ const Div4 = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+`;
+const Div5 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const FieldInfo = styled(Field)`
   border-radius: 20px;
@@ -83,6 +89,11 @@ const Label3 = styled.label`
   margin-right: 150px;
   color: #177c84;
 `;
+const FriendsLabel = styled.label`
+  margin-top: 30px;
+  margin-right: 150px;
+  color: #177c84;
+`;
 
 const LogIn = ({ values }) => {
   const [hiddenUsers, setHiddenUsers] = useState(new Array(16).fill(true));
@@ -101,8 +112,20 @@ const LogIn = ({ values }) => {
       <Title>Split-The-Bill</Title>
       <Form>
         <Div2>
-          <Label3>Split Title </Label3>
-          <FieldInfo type="text" name="title" placeholder="what's this for?" />
+          <Label3>Your Name </Label3>
+          <FieldInfo
+            type="text"
+            name="owner"
+            placeholder="please add your name.."
+          />
+        </Div2>
+        <Div2>
+          <FriendsLabel>Bill Name </FriendsLabel>
+          <FieldInfo
+            type="text"
+            name="billName"
+            placeholder="what's this for?"
+          />
         </Div2>
         <Div>
           <Div3>
@@ -116,10 +139,19 @@ const LogIn = ({ values }) => {
             </Div4>
           </Div3>
         </Div>
-        <TableUserCard />
+        <Div2>
+          <FriendsLabel>Friends </FriendsLabel>
+          <FieldInfo
+            type="text"
+            name="friends"
+            placeholder="add friends separated by commas..."
+          />
+        </Div2>
+        {/* <TableUserCard />
         {hiddenUsers.map((user, index) => (
           <TableUserCard hidden={hiddenUsers[index]} />
-        ))}
+        ))} 
+
         <div>
           <Addbutton
             type="submit"
@@ -138,15 +170,15 @@ const LogIn = ({ values }) => {
               add
             </i>
           </Addbutton>
-        </div>
-        <div>
-          <textarea
-            id="txtArea"
-            rows="8"
-            cols="38"
-            placeholder=" Leave a comment..."
-          ></textarea>
-        </div>
+            </div> */}
+        <Div5>
+          <FriendsLabel>Notes </FriendsLabel>
+          <FieldInfo
+            type="text"
+            name="comments"
+            placeholder="Leave a comment..."
+          />
+        </Div5>
         ​
         <Fieldbutton as="button" type="submit" name="submit">
           Submit Table
@@ -156,15 +188,20 @@ const LogIn = ({ values }) => {
   );
 };
 const FormikLogIn = withFormik({
-  mapPropsToValues({ title, total, date }) {
+  mapPropsToValues({ billName, total, date, friends, comments }) {
     return {
-      title: title || "",
+      billName: billName || "",
       total: total || "",
-      date: date || ""
+      date: date || "",
+      friends: friends || "",
+      comments: comments || ""
     };
   },
+
   handleSubmit(values, { setStatus }) {
     console.log("values", values);
+    values.friends = values.friends.split(",");
+    // history.push("/dashboard")
     axios
       .post("https://reqres.in/api/users/", values)
       .then(res => {
