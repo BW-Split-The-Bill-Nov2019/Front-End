@@ -26,23 +26,22 @@ const TableUserCard = props => {
   return (
     <Div1 style={{ display: props.hidden ? "none" : "block" }}>
       <Form>
-        <Amountp>Amount:</Amountp>
+        <Amountp>Amount:{values.total}</Amountp>
         <Div2>
           <i
             class="far fa-user"
             style={{ color: "#177c84", fontSize: "45px", marginRight: "10px" }}
           ></i>
-          <User type="text" name="title" placeholder="Name" />
-
+          <User type="text" name="user" placeholder="Name" />
         </Div2>
       </Form>
     </Div1>
   );
 };
 const FormikTableUserCard = withFormik({
-  mapPropsToValues({ title }) {
+  mapPropsToValues({ user }) {
     return {
-      title: title || ""
+      user: user || ""
     };
   },
   handleSubmit(values, { setStatus }) {
