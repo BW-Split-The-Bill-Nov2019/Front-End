@@ -32,7 +32,7 @@ const FieldInfo = styled(Field)`
   width: 200px;
   padding: 10px;
 `;
-const Fieldbutton = styled(Field)`
+const Fieldbutton = styled.button`
   border-radius: 20px;
   border: 1px solid #bdc3c7;
   width: 200px;
@@ -66,86 +66,73 @@ const Span = styled.span`
 `;
 
 class Login extends React.Component {
-  state = {
-    credentials: {
-      email: "",
-      password: ""
-    }
-  };
+  // state = {
+  //   credentials: {
+  //     username: "",
+  //     password: ""
+  //   }
+  // };
 
-  handleChange = e => {
-    this.setState({
-      credentials: {
-        ...this.state.credentials,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
+  // handleChange = e => {
+  //   this.setState({
+  //     credentials: {
+  //       ...this.state.credentials,
+  //       [e.target.name]: e.target.value
+  //     }
+  //   });
+  // };
 
-  login = e => {
-    e.preventDefault();
-    axiosWithAuth()
-      .post("/api/login", this.state.credentials)
-      .then(res => {
-        localStorage.setItem("token", res.data.payload);
-      })
-      .catch(err => console.log(err.response));
-  };
+  // login = e => {
+  //   e.preventDefault();
+  // };
 
   render() {
     return (
       <Div1>
         <Dropdown />
         <Subtitle>Log In to your Account</Subtitle>
-        <Form onSubmit={this.login}>
+        <Form>
           <Div2>
-            <Label3>Email</Label3>
-            <FieldInfo
-              type="text"
-              name="email"
-              value={this.state.credentials.email}
-              onChange={this.handleChange}
-            />
+            <Label3>Username</Label3>
+            <FieldInfo type="text" name="username" />
 
             <Label4>Password</Label4>
-            <FieldInfo
-              type="password"
-              name="password"
-              value={this.state.credentials.password}
-              onChange={this.handleChange}
-            />
+            <FieldInfo type="password" name="password" />
             <Button>
               <Span>Forgot Password?</Span>
             </Button>
           </Div2>
-          <Link to="/dashboard">
-            <Fieldbutton
-              className="field"
-              as="button"
-              type="submit"
-              name="submit"
-            >
-              Log In
-            </Fieldbutton>
-          </Link>
+
+          <Fieldbutton
+            className="field"
+            as="button"
+            type="submit"
+            name="submit"
+          >
+            Log In
+          </Fieldbutton>
         </Form>
       </Div1>
     );
   }
 }
 const FormikLogIn = withFormik({
-  mapPropsToValues({ email, password }) {
+  mapPropsToValues({ username, password }) {
+    console.log({ username, password });
     return {
-      email: email || "",
+      username: username || "",
       password: password || ""
     };
   },
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, formikBag) {
+    console.log("VALUES", values);
     axios
-      .post("https://reqres.in/api/users/", values)
+      .post("http://localhost:4444/api/auth/login", values)
       .then(res => {
-        setStatus(res.data);
+        localStorage.setItem("token", res.data.token);
+
         console.log(res);
+        formikBag.props.history.push("/dashboard");
       })
       .catch(err => console.log(err.response));
   }

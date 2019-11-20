@@ -29,7 +29,7 @@ const FieldInfo = styled(Field)`
   width: 200px;
   padding: 10px;
 `;
-const Fieldbutton = styled(Field)`
+const Fieldbutton = styled.button`
   border-radius: 20px;
   border: 1px solid #bdc3c7;
   width: 200px;
@@ -87,22 +87,19 @@ const CreateAccount = ({ values }) => {
           <Label3>Email </Label3>
           <FieldInfo type="text" name="email" />
 
+          <Label3>UserName </Label3>
+          <FieldInfo type="text" name="username" />
+
           <Label4>Password</Label4>
           <FieldInfo type="password" name="password" />
 
           <Label5>Confirm Password</Label5>
           <FieldInfo type="password" name="confirmPassword" />
         </Div2>
-        <Link to="/login">
-          <Fieldbutton
-            className="field"
-            as="button"
-            type="submit"
-            name="submit"
-          >
-            Create Account
-          </Fieldbutton>
-        </Link>
+
+        <Fieldbutton className="field" as="button" type="submit" name="submit">
+          Create Account
+        </Fieldbutton>
       </Form>
       <Link to="/login">
         <Button>
@@ -114,18 +111,33 @@ const CreateAccount = ({ values }) => {
   );
 };
 const FormikCreateAccount = withFormik({
-  mapPropsToValues({ firstName, lastName, email, password, confirmPassword }) {
+  mapPropsToValues({
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    username
+  }) {
     return {
       firstName: firstName || "",
       lastName: lastName || "",
       email: email || "",
       password: password || "",
+      username: username || "",
       confirmPassword: confirmPassword || ""
     };
   },
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, props }) {
+    console.log("test");
     axios
-      .post("http://localhost:4444/api/auth/register", values)
+      .post("http://localhost:4444/api/auth/register", {
+        username: values.username,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        password: values.password
+      })
       .then(res => {
         setStatus(res.data);
         console.log(res);
