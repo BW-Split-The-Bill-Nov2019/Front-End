@@ -157,7 +157,7 @@ const LogIn = ({ values }) => {
             type="submit"
             name="button"
             as="button"
-            onClick={toggleHide}
+            o  nClick={toggleHide}
           >
             <i
               class="material-icons"
@@ -188,19 +188,25 @@ const LogIn = ({ values }) => {
   );
 };
 const FormikLogIn = withFormik({
-  mapPropsToValues({ billName, total, date, friends, comments }) {
+  mapPropsToValues({ billName, total, date, friends, comments, owner }) {
     return {
       billName: billName || "",
       total: total || "",
       date: date || "",
       friends: friends || "",
-      comments: comments || ""
+      comments: comments || "",
+      owner: owner || ""
     };
   },
 
   handleSubmit(values, { setStatus }) {
     console.log("values", values);
-    values.friends = values.friends.split(",");
+    values.friends = values.friends.split(",").map(friend => {
+      return {
+        username: friend,
+        paid: "false"
+      };
+    });
     // history.push("/dashboard")
     axios
       .post("https://reqres.in/api/users/", values)

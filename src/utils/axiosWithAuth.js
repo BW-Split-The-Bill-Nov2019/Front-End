@@ -1,18 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
 
 // module that creates a new instance of the axios object
 // baseURL
 // headers object -> authorization header with the token
 
- const axiosWithAuth = () => {
+const axiosWithAuth = () => {
+  const token = localStorage.getItem("token");
 
-    const token = localStorage.getItem('token');
-    
-    return axios.create({
-        baseURL: 'http://localhost:5000',
-        headers: {
-            Authorization: token
-        }
-    });
+  return axios.create({
+    baseURL: "http://localhost:4444",
+    headers: {
+      Authorization: token
+    }
+  });
 };
 export default axiosWithAuth;
