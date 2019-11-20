@@ -14,7 +14,7 @@ function App() {
       <Route exact path="/" component={CreateAccount} />
       <Route path="/login" component={LogIn} />
       <PrivateRoute path="/dashboard" component={Dashboard} />
-      <Route path="/table" component={Table} />
+      <PrivateRoute path="/table" component={Table} />
     </div>
   );
 }
