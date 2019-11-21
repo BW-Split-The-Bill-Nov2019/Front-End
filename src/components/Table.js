@@ -199,7 +199,7 @@ const FormikLogIn = withFormik({
     };
   },
 
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, formikBag) {
     console.log("values", values);
     values.friends = values.friends.split(",").map(friend => {
       return {
@@ -211,7 +211,7 @@ const FormikLogIn = withFormik({
     axios
       .post("https://reqres.in/api/users/", values)
       .then(res => {
-        setStatus(res.data);
+        formikBag.props.history.push("/dashboard");
         console.log(res);
         //redirect user to dashboard with history.push
       })

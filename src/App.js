@@ -11,12 +11,10 @@ import PrivateRoute from "./components/PrivateRoute";
 function App() {
   return (
     <div className="App">
-
-      <Route exact path='/' component={CreateAccount} />
-      <Route path='/login' component={LogIn} />
-      <Route path='/dashboard' component={Dashboard} />
-      <Route path='/table' component={Table} />
-
+      <Route exact path="/" component={CreateAccount} />
+      <Route path="/login" component={LogIn} />
+      <PrivateRoute path="/dashboard" component={Dashboard} />
+      <PrivateRoute path="/table" component={Table} />
     </div>
   );
 }
