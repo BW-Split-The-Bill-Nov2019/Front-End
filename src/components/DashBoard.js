@@ -9,7 +9,8 @@ import PaidToYou from "./PaidToYou";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 import dummyData from "../dummyData";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import SearchForm from "./SearchForm";
 
 const Title = styled.h1`
   color: #177c84;
@@ -75,13 +76,12 @@ const H3 = styled.h3`
 const DashBoard = ({ values }) => {
   console.log(dummyData);
   const [owedToYou, setOwedToYou] = useState(dummyData.pending.owesYou);
-  // useEffect(() => {
-  //   axios.get('endpoint')
-  //       .then()
-  // }, []);
   const [youOwe, setYouOwe] = useState(dummyData.pending.youOwe);
   const [paidToYou, setPaidToYou] = useState(dummyData.paid.paidYou);
   const [youPaid, setYouPaid] = useState(dummyData.paid.youPaid);
+
+  // const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <Div1>
       <Dropdown />
@@ -100,6 +100,11 @@ const DashBoard = ({ values }) => {
         <Div2>
           <Label3>Search</Label3>
           <FieldInfo type="text" name="email" />
+          {/* <SearchForm
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+            value={searchTerm}
+          /> */}
         </Div2>
       </Form>
 
@@ -107,15 +112,17 @@ const DashBoard = ({ values }) => {
       <OutterDiv>
         <InnerDiv>
           <h4>You Owe</h4>
-          {youOwe.map(Cv => (
+          {youOwe.map((
+            Cv //.filter( item => item.friend === searchTerm)
+          ) => (
             <YouOwe Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
           ))}
 
           <H4>Owed to You</H4>
 
-          {owedToYou.map(Cv => (
+          {owedToYou.map((Cv, index) => (
             <OwedToYou
-              key={Date.now()}
+              key={index}
               Amount={Cv.amount}
               Name={Cv.friend}
               Date={Cv.date}
@@ -148,8 +155,8 @@ const FormikDashBoard = withFormik({
     };
   },
   handleSubmit(values, { setStatus }) {
-    axios
-      .post("https://reqres.in/api/users/", values)
+    axiosWithAuth()
+      .put("/api/bills/:id", values)
       .then(res => {
         setStatus(res.data);
         console.log(res);

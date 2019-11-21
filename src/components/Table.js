@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { withFormik, Form, Field } from "formik";
-import axios from "axios";
+import axiosWithAuth from "../utils/axiosWithAuth";
 import styled from "styled-components";
 // import TableUserCard from "./TableUserCard";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
+
 const Title = styled.h1`
   color: #177c84;
   font-size: 44px;
@@ -172,10 +173,10 @@ const LogIn = ({ values }) => {
           </Addbutton>
             </div> */}
         <Div5>
-          <FriendsLabel>Notes </FriendsLabel>
+          <FriendsLabel>Notes</FriendsLabel>
           <FieldInfo
             type="text"
-            name="comments"
+            name="notes"
             placeholder="Leave a comment..."
           />
         </Div5>
@@ -188,28 +189,30 @@ const LogIn = ({ values }) => {
   );
 };
 const FormikLogIn = withFormik({
-  mapPropsToValues({ billName, total, date, friends, comments, owner }) {
+  mapPropsToValues({ billName, total, date, friends, notes, owner }) {
     return {
       billName: billName || "",
       total: total || "",
       date: date || "",
       friends: friends || "",
-      comments: comments || "",
+      notes: notes || "",
       owner: owner || ""
     };
   },
 
   handleSubmit(values, formikBag) {
-    console.log("values", values);
     values.friends = values.friends.split(",").map(friend => {
       return {
-        username: friend,
-        paid: "false"
+        username: friend.trim(),
+        paid: false
       };
     });
+
+    values.total = parseInt(values.total);
+    console.log("values", values);
     // history.push("/dashboard")
-    axios
-      .post("https://bw-split-the-bill.herokuapp.com/api/bills", values)
+    axiosWithAuth()
+      .post("/api/bills", values)
       .then(res => {
         formikBag.props.history.push("/dashboard");
         console.log(res);

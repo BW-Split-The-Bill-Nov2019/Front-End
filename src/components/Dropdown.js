@@ -45,6 +45,9 @@ class Dropdown extends React.Component {
               </a>
             </li>
             <li>
+              <Link to="/">Register</Link>
+            </li>
+            <li>
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
