@@ -128,10 +128,10 @@ const FormikCreateAccount = withFormik({
       confirmPassword: confirmPassword || ""
     };
   },
-  handleSubmit(values, { setStatus, props }) {
+  handleSubmit(values, formikBag) {
     console.log("test");
     axios
-      .post("http://localhost:4444/api/auth/register", {
+      .post("https://bw-split-the-bill.herokuapp.com/api/auth/register", {
         username: values.username,
         firstName: values.firstName,
         lastName: values.lastName,
@@ -139,8 +139,8 @@ const FormikCreateAccount = withFormik({
         password: values.password
       })
       .then(res => {
-        setStatus(res.data);
         console.log(res);
+        formikBag.props.history.push("/login");
       })
       .catch(err => console.log(err.response));
   }
