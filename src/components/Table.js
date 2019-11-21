@@ -209,7 +209,7 @@ const FormikLogIn = withFormik({
     });
     // history.push("/dashboard")
     axios
-      .post("https://reqres.in/api/users/", values)
+      .post("https://bw-split-the-bill.herokuapp.com/api/bills", values)
       .then(res => {
         formikBag.props.history.push("/dashboard");
         console.log(res);

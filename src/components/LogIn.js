@@ -127,7 +127,7 @@ const FormikLogIn = withFormik({
   handleSubmit(values, formikBag) {
     console.log("VALUES", values);
     axios
-      .post("http://localhost:4444/api/auth/login", values)
+      .post("https://bw-split-the-bill.herokuapp.com/api/auth/login", values)
       .then(res => {
         localStorage.setItem("token", res.data.token);
 
