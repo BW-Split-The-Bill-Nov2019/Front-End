@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import axios from "axios";
 import styled from "styled-components";
@@ -75,6 +75,10 @@ const H3 = styled.h3`
 const DashBoard = ({ values }) => {
   console.log(dummyData);
   const [owedToYou, setOwedToYou] = useState(dummyData.pending.owesYou);
+  // useEffect(() => {
+  //   axios.get('endpoint')
+  //       .then()
+  // }, []);
   const [youOwe, setYouOwe] = useState(dummyData.pending.youOwe);
   const [paidToYou, setPaidToYou] = useState(dummyData.paid.paidYou);
   const [youPaid, setYouPaid] = useState(dummyData.paid.youPaid);
@@ -110,7 +114,12 @@ const DashBoard = ({ values }) => {
           <H4>Owed to You</H4>
 
           {owedToYou.map(Cv => (
-            <OwedToYou Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
+            <OwedToYou
+              key={Date.now()}
+              Amount={Cv.amount}
+              Name={Cv.friend}
+              Date={Cv.date}
+            />
           ))}
         </InnerDiv>
       </OutterDiv>
