@@ -9,6 +9,7 @@ import PaidToYou from "./PaidToYou";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 import dummyData from "../dummyData";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Title = styled.h1`
   color: #177c84;
@@ -73,10 +74,10 @@ const H3 = styled.h3`
 
 const DashBoard = ({ values }) => {
   console.log(dummyData);
-  const [owedToYou, setOwedToYou] = useState(dummyData.owedToYou);
-  const [youOwe, setYouOwe] = useState(dummyData.youOwe);
-  const [paidToYou, setPaidToYou] = useState(dummyData.paidToYou);
-  const [youPaid, setYouPaid] = useState(dummyData.youPaid);
+  const [owedToYou, setOwedToYou] = useState(dummyData.pending.owesYou);
+  const [youOwe, setYouOwe] = useState(dummyData.pending.youOwe);
+  const [paidToYou, setPaidToYou] = useState(dummyData.paid.paidYou);
+  const [youPaid, setYouPaid] = useState(dummyData.paid.youPaid);
   return (
     <Div1>
       <Dropdown />
@@ -103,13 +104,13 @@ const DashBoard = ({ values }) => {
         <InnerDiv>
           <h4>You Owe</h4>
           {youOwe.map(Cv => (
-            <YouOwe Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
+            <YouOwe Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
           ))}
 
           <H4>Owed to You</H4>
 
           {owedToYou.map(Cv => (
-            <OwedToYou Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
+            <OwedToYou Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
           ))}
         </InnerDiv>
       </OutterDiv>
@@ -118,12 +119,12 @@ const DashBoard = ({ values }) => {
         <InnerDiv>
           <h4>You Paid</h4>
           {youPaid.map(Cv => (
-            <YouPaid Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
+            <YouPaid Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
           ))}
 
           <H4>Paid to You</H4>
           {paidToYou.map(Cv => (
-            <PaidToYou Amount={Cv.Amount} Name={Cv.Name} Date={Cv.Date} />
+            <PaidToYou Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
           ))}
         </InnerDiv>
       </OutterDiv>
