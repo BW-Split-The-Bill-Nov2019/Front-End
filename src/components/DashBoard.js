@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import dummyData from "../dummyData";
 import axiosWithAuth from "../utils/axiosWithAuth";
 import SearchForm from "./SearchForm";
+import { UserContext } from "../App";
 
 const Title = styled.h1`
   color: #177c84;
@@ -74,13 +75,26 @@ const H3 = styled.h3`
 `;
 
 const DashBoard = ({ values }) => {
-  console.log(dummyData);
-  const [owedToYou, setOwedToYou] = useState(dummyData.pending.owesYou);
+  const { user } = React.useContext(UserContext);
+
+  // const [owedToYou, setOwedToYou] = useState(dummyData.pending.owesYou);
+  const [owedToYou, setOwedToYou] = useState([[]]);
   const [youOwe, setYouOwe] = useState(dummyData.pending.youOwe);
   const [paidToYou, setPaidToYou] = useState(dummyData.paid.paidYou);
   const [youPaid, setYouPaid] = useState(dummyData.paid.youPaid);
 
-  // const [searchTerm, setSearchTerm] = useState("");
+  React.useEffect(() => {
+    console.log("USER", user);
+    axiosWithAuth()
+      .get(`/api/bills/pending/${user.username}`)
+      .then(res => {
+        console.log("PENDING PAYMENTS", res.data.friendsThatOweYou);
+        setOwedToYou(res.data.friendsThatOweYou);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <Div1>
@@ -112,35 +126,55 @@ const DashBoard = ({ values }) => {
       <OutterDiv>
         <InnerDiv>
           <h4>You Owe</h4>
-          {youOwe.map((
-            Cv //.filter( item => item.friend === searchTerm)
-          ) => (
-            <YouOwe Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
-          ))}
-
-          <H4>Owed to You</H4>
-
-          {owedToYou.map((Cv, index) => (
-            <OwedToYou
+          {youOwe.map((Cv, index) => (
+            <YouOwe
               key={index}
               Amount={Cv.amount}
               Name={Cv.friend}
               Date={Cv.date}
             />
           ))}
+
+          <H4>Owed to You</H4>
+
+          {!owedToYou.length ? (
+            <p>No pending payments at the moment</p>
+          ) : (
+            owedToYou.map(x =>
+              x.map((payment, index) => (
+                <OwedToYou
+                  key={index}
+                  billId={payment.billId}
+                  Amount={payment.amountDue}
+                  Name={payment.username}
+                  Date={payment.date.split("-").join("/")}
+                />
+              ))
+            )
+          )}
         </InnerDiv>
       </OutterDiv>
       <H3>Paid</H3>
       <OutterDiv>
         <InnerDiv>
           <h4>You Paid</h4>
-          {youPaid.map(Cv => (
-            <YouPaid Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
+          {youPaid.map((Cv, index) => (
+            <YouPaid
+              key={index}
+              Amount={Cv.amount}
+              Name={Cv.friend}
+              Date={Cv.date}
+            />
           ))}
 
           <H4>Paid to You</H4>
-          {paidToYou.map(Cv => (
-            <PaidToYou Amount={Cv.amount} Name={Cv.friend} Date={Cv.date} />
+          {paidToYou.map((Cv, index) => (
+            <PaidToYou
+              key={index}
+              Amount={Cv.amount}
+              Name={Cv.friend}
+              Date={Cv.date}
+            />
           ))}
         </InnerDiv>
       </OutterDiv>

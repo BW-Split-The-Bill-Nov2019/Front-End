@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Dropdown from "./Dropdown";
 import { Link } from "react-router-dom";
 import axiosWithAuth from "../utils/axiosWithAuth";
+import { UserContext } from "../App";
 
 const Div1 = styled.div`
   //box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
@@ -65,56 +66,34 @@ const Span = styled.span`
   text-decoration: underline;
 `;
 
-class Login extends React.Component {
-  // state = {
-  //   credentials: {
-  //     username: "",
-  //     password: ""
-  //   }
-  // };
+let userCtx = null;
 
-  // handleChange = e => {
-  //   this.setState({
-  //     credentials: {
-  //       ...this.state.credentials,
-  //       [e.target.name]: e.target.value
-  //     }
-  //   });
-  // };
+function Login() {
+  const _userCtx = React.useContext(UserContext);
+  userCtx = _userCtx;
 
-  // login = e => {
-  //   e.preventDefault();
-  // };
+  return (
+    <Div1>
+      <Dropdown />
+      <Subtitle>Log In to your Account</Subtitle>
+      <Form>
+        <Div2>
+          <Label3>Username</Label3>
+          <FieldInfo type="text" name="username" />
 
-  render() {
-    return (
-      <Div1>
-        <Dropdown />
-        <Subtitle>Log In to your Account</Subtitle>
-        <Form>
-          <Div2>
-            <Label3>Username</Label3>
-            <FieldInfo type="text" name="username" />
+          <Label4>Password</Label4>
+          <FieldInfo type="password" name="password" />
+          <Button>
+            <Span>Forgot Password?</Span>
+          </Button>
+        </Div2>
 
-            <Label4>Password</Label4>
-            <FieldInfo type="password" name="password" />
-            <Button>
-              <Span>Forgot Password?</Span>
-            </Button>
-          </Div2>
-
-          <Fieldbutton
-            className="field"
-            as="button"
-            type="submit"
-            name="submit"
-          >
-            Log In
-          </Fieldbutton>
-        </Form>
-      </Div1>
-    );
-  }
+        <Fieldbutton className="field" as="button" type="submit" name="submit">
+          Log In
+        </Fieldbutton>
+      </Form>
+    </Div1>
+  );
 }
 const FormikLogIn = withFormik({
   mapPropsToValues({ username, password }) {
@@ -130,8 +109,11 @@ const FormikLogIn = withFormik({
       .post("https://bw-split-the-bill.herokuapp.com/api/auth/login", values)
       .then(res => {
         localStorage.setItem("token", res.data.token);
+        // formikBag.props.setUser(res.data);
+        userCtx.setUser(res.data);
 
         console.log(res);
+        console.log("formikBag Props", formikBag.props);
         formikBag.props.history.push("/dashboard");
       })
       .catch(err => console.log(err.response));

@@ -41,7 +41,7 @@ const OwedToYou = props => {
           <S>{props.Name}</S>
         </P>
         <P>
-          <Smoney>{props.Amount}</Smoney>
+          <Smoney>${props.Amount}</Smoney>
         </P>
         <ToggleDiv>
           <Switch isOn={value} handleToggle={() => setValue(!value)} />
